@@ -12,11 +12,13 @@ uses
 {$R *.res}
 
 procedure WriteREGCommand;
+const
+  c_strPath = '\shell\在此处打开命令窗口(管理员)\command';
 begin
   with TRegistry.Create do
   begin
     RootKey := HKEY_CLASSES_ROOT;
-    OpenKey('*\shell\在此处打开命令窗口(管理员)\command', True);
+    OpenKey('*' + c_strPath, True);
     WriteString('', '"' + ParamStr(0) + '" "%1"');
     Free;
   end;
@@ -24,7 +26,7 @@ begin
   with TRegistry.Create do
   begin
     RootKey := HKEY_CLASSES_ROOT;
-    OpenKey('Directory\Background\shell\在此处打开命令窗口(管理员)\command', True);
+    OpenKey('Directory\Background' + c_strPath, True);
     WriteString('', '"' + ParamStr(0) + '" "%V"');
     Free;
   end;
@@ -32,7 +34,7 @@ begin
   with TRegistry.Create do
   begin
     RootKey := HKEY_CLASSES_ROOT;
-    OpenKey('Folder\shell\在此处打开命令窗口(管理员)\command', True);
+    OpenKey('Folder' + c_strPath, True);
     WriteString('', '"' + ParamStr(0) + '" "%1"');
     Free;
   end;
